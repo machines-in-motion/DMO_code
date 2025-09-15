@@ -1,0 +1,67 @@
+params:  
+  diff_env:
+    name: HopperEnv
+    stochastic_env: True
+    episode_length: 1000
+    MM_caching_frequency: 16
+
+  network:
+    actor: ActorStochasticMLP
+    actor_mlp:
+      units: [128, 64, 32]
+      activation: elu
+
+    critic: CriticMLP
+    critic_mlp:
+      units: [64, 64]
+      activation: elu
+
+    dyn_model: StochSSM
+    dyn_model_mlp:
+      units: [512, 512]
+      activation: silu
+      reward_head_units: [512, 512]
+      num_bins: 101
+      vmin: -10.0
+      vmax: 10.0
+      use_bins: True
+
+  config:
+    name: df_hopper_dmo_shac
+    actor_learning_rate: 2e-3 # 5e-4 # 2e-3 # adam
+    critic_learning_rate: 2e-4 # adam
+
+    train_value_function: True
+
+    dyn_model_learning_rate: 2e-3 # adam
+    lr_schedule: linear # ['constant', 'linear']
+    target_critic_alpha: 0.2 
+    obs_rms: True
+    ret_rms: False
+    critic_iterations: 16
+    critic_method: td-lambda
+    lambda: 0.95
+    num_batch: 4
+    gamma: 0.99
+    betas: [0.7, 0.95] # adam
+    max_epochs: 1000
+    steps_num: 16
+    grad_norm: 1.0
+    truncate_grads: True
+    num_actors: 256
+    save_interval: 400
+    dyn_buffer_size: 1e6
+    dyn_udt: 128
+    init_dyn_udt: 1000
+    min_replay: 4000
+    dyn_pred_batch_size: 256
+    learn_reward: False
+
+    wandb_track: True
+    wandb_project_name: neuro_diff_sim
+
+    player:
+      determenistic: False
+      games_num: 1
+      num_actors: 1
+      print_stats: True

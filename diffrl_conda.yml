@@ -1,0 +1,17 @@
+name: dmo_dflex
+channels:
+  - pytorch
+  - defaults
+dependencies:
+  - python=3.8.13=h12debd9_0
+  - pytorch=1.11.0=py3.8_cuda11.3_cudnn8.2.0_0
+  - torchvision=0.12.0=py38_cu113
+  - pip:
+    - pyyaml==6.0
+    - tensorboard==2.8.0
+    - tensorboardx==2.5
+    - urdfpy==0.0.22
+    - usd-core==22.3
+    - protobuf==3.20
+    - gym==0.23.1
+    - wandb==0.17.5
