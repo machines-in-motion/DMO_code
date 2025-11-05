@@ -1353,8 +1353,8 @@ class DMOShac:
                         actions_diff.register_hook(create_hook())
             #################################################
 
-            with torch.no_grad(): #/!\#
-                raw_rew = rew.clone() #/!\#
+            #with torch.no_grad(): #/!\#
+            #    raw_rew = rew.clone() #/!\#
 
             # Differential reward recomputation
             self.time_report.start_timer("recomputing reward")
@@ -1371,6 +1371,9 @@ class DMOShac:
 
                     raise ValueError"""
             rew = recalculated_rew.clone()
+
+            with torch.no_grad(): #/!\#
+                raw_rew = rew.clone() #/!\#
 
             if self.log_gradients:
                 recalculated_rew_ = self.env.diffRecalculateReward(real_next_obs_, actions_, last_actions[i], last_last_actions[i], imagined_trajs = self.imagined_batch_size)

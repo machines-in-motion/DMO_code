@@ -33,7 +33,7 @@ params:
       hidden_to_value: True
 
   config:
-    name: df_go2_neuro_diff_sim
+    name: go2_dmo_shac
     actor_learning_rate: 3e-4 # adam
     critic_learning_rate: 5e-4 # 2e-4 # adam
     dyn_model_learning_rate: 3e-4 # adam
